@@ -9,7 +9,8 @@ import java.util.List;
 @Data
 @Builder
 @EqualsAndHashCode
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Movie {
     @Id
