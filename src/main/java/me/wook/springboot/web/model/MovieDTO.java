@@ -1,4 +1,4 @@
-package me.wook.springboot.web.dto;
+package me.wook.springboot.web.model;
 
 import lombok.*;
 import me.wook.springboot.data.entity.Movie;
@@ -8,7 +8,7 @@ import me.wook.springboot.data.entity.Movie;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class MovieDto {
+public class MovieDTO {
     private long id;
     private String name;
     
@@ -19,7 +19,7 @@ public class MovieDto {
                 .build();
     }
     
-    public Movie movie(MovieDto movieDto) {
+    public Movie movie(MovieDTO movieDto) {
         return Movie.builder()
                 .id(movieDto.getId())
                 .name(movieDto.getName())
