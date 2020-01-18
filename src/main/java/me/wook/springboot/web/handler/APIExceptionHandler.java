@@ -1,6 +1,6 @@
-package me.wook.springboot.web.controller.handler;
+package me.wook.springboot.web.handler;
 
-import me.wook.springboot.web.model.ResponseVO;
+import me.wook.springboot.web.dto.ResponseVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
-    
+
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ResponseVO> exception(Exception e) {

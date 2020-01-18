@@ -1,4 +1,4 @@
-package me.wook.springboot.web.model;
+package me.wook.springboot.web.dto;
 
 import lombok.*;
 
