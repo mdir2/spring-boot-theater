@@ -13,7 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,22 +39,28 @@ public class MovieController {
   ResponseEntity<Page<Movie>> list(@RequestParam(defaultValue = "1") final int page,
       @RequestParam(defaultValue = "10") final int pageSize) throws Exception {
     return Optional
-        .of(new ResponseEntity(movieService.list(PageRequest.of(page - 1, pageSize)),
-            HttpStatus.OK))
+        .of(ResponseEntity.ok(movieService.list(PageRequest.of(page - 1, pageSize))))
         .orElseThrow(MovieException::new);
   }
 
   @PostMapping("")
-  ResponseEntity<ResponseVO> add(@RequestBody MovieDTO movieDto) {
+  ResponseEntity<ResponseVO> add(@RequestBody final MovieDTO movieDto) {
     return Optional
-        .of(new ResponseEntity<ResponseVO>(doProcess(movieService.add(movieDto)), HttpStatus.OK))
+        .of(ResponseEntity.ok(doProcess(movieService.add(movieDto))))
         .orElseThrow(MovieException::new);
   }
 
   @PutMapping("/{id}")
-  ResponseEntity<ResponseVO> update(@RequestBody MovieDTO movieDTO) {
+  ResponseEntity<ResponseVO> update(@RequestBody final MovieDTO movieDTO) {
     return Optional
-        .of(new ResponseEntity(doProcess(movieService.update(movieDTO)), HttpStatus.OK))
+        .of(ResponseEntity.ok(doProcess(movieService.update(movieDTO))))
+        .orElseThrow(MovieException::new);
+  }
+
+  @DeleteMapping("/{id}")
+  ResponseEntity<ResponseVO> delete(@PathVariable final int id) {
+    return Optional
+        .of(ResponseEntity.ok(doProcess(movieService.delete(MovieDTO.builder().id(id).build()))))
         .orElseThrow(MovieException::new);
   }
 

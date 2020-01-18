@@ -14,4 +14,6 @@ public interface MovieService {
   boolean add(final MovieDTO movieDto);
 
   boolean update(final MovieDTO movieDTO);
+
+  boolean delete(final MovieDTO movieDTO);
 }

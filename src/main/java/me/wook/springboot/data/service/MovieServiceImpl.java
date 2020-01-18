@@ -1,7 +1,6 @@
 package me.wook.springboot.data.service;
 
 import java.util.Optional;
-import javax.persistence.EntityManager;
 import me.wook.springboot.data.entity.Movie;
 import me.wook.springboot.data.repository.MovieRepository;
 import me.wook.springboot.movie.exception.MovieException;
@@ -14,13 +13,10 @@ import org.springframework.stereotype.Service;
 @Service("movieService")
 public class MovieServiceImpl implements MovieService {
 
-  private EntityManager entityManager;
-
   private MovieRepository movieRepository;
 
   @Autowired
-  public MovieServiceImpl(EntityManager entityManager, MovieRepository movieRepository) {
-    this.entityManager = entityManager;
+  public MovieServiceImpl(MovieRepository movieRepository) {
     this.movieRepository = movieRepository;
   }
 
@@ -41,11 +37,18 @@ public class MovieServiceImpl implements MovieService {
 
   @Override
   public boolean update(MovieDTO movieDTO) {
-    Optional<Movie> optionalMovie = movieRepository.findById(movieDTO.getId());
-    optionalMovie.ifPresent(movie -> {
+    movieRepository.findById(movieDTO.getId()).ifPresent(movie -> {
       movie = movieDTO.movie();
-      movie = Optional.of(movieRepository.save(movie)).orElseThrow(MovieException::new);
+      Optional.of(movieRepository.save(movie)).orElseThrow(MovieException::new);
     });
-    return optionalMovie.isPresent();
+    return movieRepository.findById(movieDTO.getId()).isPresent();
+  }
+
+  @Override
+  public boolean delete(MovieDTO movieDTO) {
+    movieRepository.findById(movieDTO.getId()).ifPresent(movie -> {
+      movieRepository.delete(movieDTO.movie());
+    });
+    return movieRepository.findById(movieDTO.getId()).isPresent();
   }
 }
