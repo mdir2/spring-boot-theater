@@ -1,71 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>spring-boot-theater</artifactId>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>org.springframework.boot</groupId>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>me.wook</groupId>
+    <artifactId>spring-boot-theater</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-boot-theater</name>
+    <description>Spring Boot</description>
 
-    <dependency>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
-    <dependency>
-      <artifactId>springfox-swagger2</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>2.9.2</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-    <dependency>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>2.9.2</version>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
-    <dependency>
-      <artifactId>mysql-connector-java</artifactId>
-      <groupId>mysql</groupId>
-    </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
 
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <description>Spring Boot</description>
-  <groupId>me.wook</groupId>
-  <modelVersion>4.0.0</modelVersion>
-  <name>spring-boot-theater</name>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
 
-  <parent>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <groupId>org.springframework.boot</groupId>
-    <relativePath/>
-    <version>2.2.1.RELEASE</version> <!-- lookup parent from repository -->
-  </parent>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
-  <properties>
-    <java.version>1.8</java.version>
-  </properties>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <version>0.0.1-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
