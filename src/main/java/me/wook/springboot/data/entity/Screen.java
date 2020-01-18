@@ -1,11 +1,11 @@
 package me.wook.springboot.data.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,12 +22,12 @@ public class Screen {
   @Id
   @GeneratedValue
   private long id;
+
   @Column
   private String name;
 
   @ManyToOne
+  @JoinColumn(name = "movie_id")
+  @JsonIgnore
   private Movie movie;
-
-  @ManyToMany
-  private List<Seat> seats;
 }

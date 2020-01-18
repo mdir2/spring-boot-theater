@@ -22,9 +22,7 @@ public class Seat {
   @Id
   @GeneratedValue
   private long id;
+
   @Column
   private String name;
-
-  @ManyToMany
-  private List<Screen> screens = new ArrayList<>();
 }

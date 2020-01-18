@@ -3,17 +3,15 @@ package me.wook.springboot.web.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseVO {
+public class ScreenDTO {
 
-  @Builder.Default
-  private int status = 200;
-  @Builder.Default
-  private String message = "";
+  private long id;
+
+  private String name;
 }

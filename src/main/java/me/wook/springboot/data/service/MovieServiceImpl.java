@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-@Service("movieService")
+@Service
 public class MovieServiceImpl implements MovieService {
 
   private MovieRepository movieRepository;
