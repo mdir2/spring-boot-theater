@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,22 +29,34 @@ public class MovieController {
   private MovieService movieService;
 
   @Autowired
-  public MovieController(MovieService movieService) {
+  MovieController(MovieService movieService) {
     this.movieService = movieService;
   }
 
   @GetMapping("")
-  private ResponseEntity<Page<Movie>> list(@RequestParam(defaultValue = "1") final int page,
+  ResponseEntity<Page<Movie>> list(@RequestParam(defaultValue = "1") final int page,
       @RequestParam(defaultValue = "10") final int pageSize) throws Exception {
     return Optional
-        .of(new ResponseEntity(movieService.list(PageRequest.of(page - 1, pageSize)), HttpStatus.OK))
+        .of(new ResponseEntity(movieService.list(PageRequest.of(page - 1, pageSize)),
+            HttpStatus.OK))
         .orElseThrow(MovieException::new);
   }
 
   @PostMapping("")
-  private ResponseEntity<ResponseVO> add(@RequestBody MovieDTO movieDto) throws Exception {
-    boolean result = movieService.add(movieDto);
+  ResponseEntity<ResponseVO> add(@RequestBody MovieDTO movieDto) {
+    return Optional
+        .of(new ResponseEntity<ResponseVO>(doProcess(movieService.add(movieDto)), HttpStatus.OK))
+        .orElseThrow(MovieException::new);
+  }
 
+  @PutMapping("/{id}")
+  ResponseEntity<ResponseVO> update(@RequestBody MovieDTO movieDTO) {
+    return Optional
+        .of(new ResponseEntity(doProcess(movieService.update(movieDTO)), HttpStatus.OK))
+        .orElseThrow(MovieException::new);
+  }
+
+  private ResponseVO doProcess(final boolean result) {
     Function<Boolean, ResponseVO> function = bool -> {
       if (bool) {
         return null;
@@ -55,8 +68,6 @@ public class MovieController {
             .build();
       }
     };
-
-    return Optional.of(new ResponseEntity<ResponseVO>(function.apply(result), HttpStatus.OK))
-        .orElseThrow(MovieException::new);
+    return function.apply(result);
   }
 }

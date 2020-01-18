@@ -9,5 +9,9 @@ public interface MovieService {
 
   Page<Movie> list(final Pageable pageable) throws Exception;
 
+  Movie detail(final MovieDTO movieDTO);
+
   boolean add(final MovieDTO movieDto);
+
+  boolean update(final MovieDTO movieDTO);
 }

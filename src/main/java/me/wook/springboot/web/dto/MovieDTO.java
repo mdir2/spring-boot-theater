@@ -1,6 +1,10 @@
 package me.wook.springboot.web.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import me.wook.springboot.data.entity.Movie;
 
 @Data
@@ -9,20 +13,15 @@ import me.wook.springboot.data.entity.Movie;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class MovieDTO {
-    private long id;
-    private String name;
 
-    public Movie movie() {
-        return Movie.builder()
-                .id(id)
-                .name(name)
-                .build();
-    }
+  private long id;
+  private String name;
+  private String description;
 
-    public Movie movie(MovieDTO movieDto) {
-        return Movie.builder()
-                .id(movieDto.getId())
-                .name(movieDto.getName())
-                .build();
-    }
+  public Movie movie() {
+    return Movie.builder()
+        .id(id)
+        .name(name)
+        .build();
+  }
 }

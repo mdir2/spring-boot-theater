@@ -10,12 +10,10 @@ import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -24,12 +22,14 @@ public class Movie {
   @Id
   @GeneratedValue
   private long id;
+
   @Column
   private String name;
+
+  @Column
+  private String description;
 
   @OneToMany
   private List<Screen> screens = new ArrayList<>();
 
 }
-
-

@@ -1,6 +1,10 @@
 package me.wook.springboot.web.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -8,12 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class ResponseVO {
-    @Builder.Default
-    private int status = 200;
-    @Builder.Default
-    private int errorCode = 200;
-    @Builder.Default
-    private String message = "";
-    @Builder.Default
-    private String errorMessage = "";
+
+  @Builder.Default
+  private int status = 200;
+  @Builder.Default
+  private String message = "";
 }

@@ -1,8 +1,10 @@
 package me.wook.springboot.data.service;
 
 import java.util.Optional;
+import javax.persistence.EntityManager;
 import me.wook.springboot.data.entity.Movie;
 import me.wook.springboot.data.repository.MovieRepository;
+import me.wook.springboot.movie.exception.MovieException;
 import me.wook.springboot.web.dto.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,10 +14,13 @@ import org.springframework.stereotype.Service;
 @Service("movieService")
 public class MovieServiceImpl implements MovieService {
 
+  private EntityManager entityManager;
+
   private MovieRepository movieRepository;
 
   @Autowired
-  public MovieServiceImpl(MovieRepository movieRepository) {
+  public MovieServiceImpl(EntityManager entityManager, MovieRepository movieRepository) {
+    this.entityManager = entityManager;
     this.movieRepository = movieRepository;
   }
 
@@ -25,7 +30,20 @@ public class MovieServiceImpl implements MovieService {
   }
 
   @Override
+  public Movie detail(MovieDTO movieDTO) {
+    return movieRepository.findById(movieDTO.movie().getId()).orElseThrow(MovieException::new);
+  }
+
+  @Override
   public boolean add(final MovieDTO movieDto) {
     return Optional.of(movieRepository.save(movieDto.movie())).isPresent();
+  }
+
+  @Override
+  public boolean update(MovieDTO movieDTO) {
+    movieRepository.findById(movieDTO.getId()).ifPresent(movie -> {
+      movie = movieDTO.movie();
+    });
+    return false;
   }
 }
