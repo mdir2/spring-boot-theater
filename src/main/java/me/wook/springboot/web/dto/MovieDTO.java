@@ -22,6 +22,7 @@ public class MovieDTO {
     return Movie.builder()
         .id(id)
         .name(name)
+        .description(description)
         .build();
   }
 }

@@ -41,9 +41,11 @@ public class MovieServiceImpl implements MovieService {
 
   @Override
   public boolean update(MovieDTO movieDTO) {
-    movieRepository.findById(movieDTO.getId()).ifPresent(movie -> {
+    Optional<Movie> optionalMovie = movieRepository.findById(movieDTO.getId());
+    optionalMovie.ifPresent(movie -> {
       movie = movieDTO.movie();
+      movie = Optional.of(movieRepository.save(movie)).orElseThrow(MovieException::new);
     });
-    return false;
+    return optionalMovie.isPresent();
   }
 }
