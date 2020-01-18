@@ -8,25 +8,25 @@
 
 * 영화관 모델 생성
 
-1. Movie - 영화
+  1. Movie - 영화
 
-1. Screen - 상영관
+  1. Screen - 상영관
 
-1. Seat - 좌석
+  1. Seat - 좌석
 
 * 영화 예매용 모델 생성
 
-1. Reservation - 예약
+  1. Reservation - 예약
 
 * 고객 모델 생성
 
-1. Customer - 고객
+  1. Customer - 고객
 
 * 할인 & 정책 생성
 
-1. Policy - 정책
+  1. Policy - 정책
 
-2. Discount - 할인
+  2. Discount - 할인
 
 #### API
 
