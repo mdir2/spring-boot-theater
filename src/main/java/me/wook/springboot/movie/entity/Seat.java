@@ -1,4 +1,4 @@
-package me.wook.springboot.data.entity;
+package me.wook.springboot.movie.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

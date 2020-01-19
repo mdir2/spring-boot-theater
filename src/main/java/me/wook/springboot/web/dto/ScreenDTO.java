@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ScreenDTO {
 
-  private long id;
-
   private String name;
 }

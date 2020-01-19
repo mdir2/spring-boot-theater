@@ -7,16 +7,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import me.wook.springboot.data.entity.Screen;
-import me.wook.springboot.data.service.ScreenService;
+import io.swagger.models.Response;
+import me.wook.springboot.movie.entity.Screen;
+import me.wook.springboot.movie.service.ScreenService;
 import me.wook.springboot.web.dto.ResponseVO;
 import me.wook.springboot.web.dto.ScreenDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,18 +62,26 @@ public class ScreenController {
     return responseEntity(screenService.list(PageRequest.of(page - 1, pageSize)));
   }
 
-  @ApiOperation("스크린 추가")
+  @ApiOperation("스크린 상세 정보")
   @ApiImplicitParams({
-      @ApiImplicitParam(
-          name = "movieId",
-          value = "영화 아이디",
-          dataType = "long",
-          paramType = "query",
-          required = true
-      ),
       @ApiImplicitParam(
           name = "id",
           value = "스크린 아이디",
+          dataType = "long",
+          paramType = "path",
+          required = true
+      )
+  })
+  @GetMapping("/{id}")
+  ResponseEntity<Screen> detail(@PathVariable final long id) {
+    return responseEntity(screenService.detail(id));
+  }
+
+  @ApiOperation("스크린 추가")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "id",
+          value = "영화 아이디",
           dataType = "long",
           paramType = "query",
           required = true
@@ -83,7 +95,44 @@ public class ScreenController {
       )
   })
   @PostMapping("")
-  ResponseEntity<ResponseVO> add(final ScreenDTO screenDTO, final long id) {
+  ResponseEntity<ResponseVO> add(final long id, final ScreenDTO screenDTO) {
     return responseEntity(of(screenService.save(id, screenDTO)));
+  }
+
+  @ApiOperation("스크린 정보 수정")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "id",
+          value = "스크린 아이디",
+          dataType = "long",
+          paramType = "path",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "name",
+          value = "스크린 이름",
+          dataType = "string",
+          paramType = "query",
+          required = true
+      )
+  })
+  @PutMapping("/{id}")
+  ResponseEntity<ResponseVO> update(@PathVariable final long id, final ScreenDTO screenDTO) {
+    return responseEntity(of(screenService.update(id, screenDTO)));
+  }
+
+  @ApiOperation("스크린 삭제")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "id",
+          value = "스크린 아이디",
+          dataType = "long",
+          paramType = "path",
+          required = true
+      )
+  })
+  @DeleteMapping("/{id}")
+  ResponseEntity<ResponseVO> delete(@PathVariable final long id) {
+    return responseEntity(of(screenService.delete(id)));
   }
 }

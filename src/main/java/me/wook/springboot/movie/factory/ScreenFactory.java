@@ -1,17 +1,16 @@
-package me.wook.springboot.data.factory;
+package me.wook.springboot.movie.factory;
 
-import me.wook.springboot.data.entity.Movie;
-import me.wook.springboot.data.entity.Screen;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import me.wook.springboot.movie.entity.Movie;
+import me.wook.springboot.movie.entity.Screen;
 import me.wook.springboot.web.dto.ScreenDTO;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ScreenFactory {
-
-  private ScreenFactory() {
-  }
 
   public static Screen screen(ScreenDTO screenDTO, Movie movie) {
     return Screen.builder()
-        .id(screenDTO.getId())
         .name(screenDTO.getName())
         .movie(movie)
         .build();

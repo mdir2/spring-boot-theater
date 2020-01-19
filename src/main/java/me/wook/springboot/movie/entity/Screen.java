@@ -1,24 +1,23 @@
-package me.wook.springboot.data.entity;
+package me.wook.springboot.movie.entity;
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Movie {
+public class Screen {
 
   @Id
   @GeneratedValue
@@ -27,9 +26,8 @@ public class Movie {
   @Column
   private String name;
 
-  @Column
-  private String description;
-
-  @OneToMany(mappedBy = "movie")
-  private Collection<Screen> screens;
+  @ManyToOne
+  @JoinColumn(name = "movie_id")
+  @JsonIgnore
+  private Movie movie;
 }

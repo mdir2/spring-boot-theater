@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.wook.springboot.data.entity.Movie;
+import me.wook.springboot.movie.entity.Movie;
 
 @Data
 @Builder
@@ -12,15 +12,6 @@ import me.wook.springboot.data.entity.Movie;
 @AllArgsConstructor
 public class MovieDTO {
 
-  private long id;
   private String name;
   private String description;
-
-  public Movie movie() {
-    return Movie.builder()
-        .id(id)
-        .name(name)
-        .description(description)
-        .build();
-  }
 }

@@ -1,6 +1,6 @@
-package me.wook.springboot.data.repository;
+package me.wook.springboot.movie.repository;
 
-import me.wook.springboot.data.entity.Screen;
+import me.wook.springboot.movie.entity.Screen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package me.wook.springboot.web.util;
 
 import java.util.Optional;
 import java.util.function.Function;
-import me.wook.springboot.movie.exception.MovieException;
+import me.wook.springboot.exception.MovieException;
 import me.wook.springboot.web.dto.ResponseVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public final class ResponseUtils {
   public static <T> ResponseEntity<T> responseEntity(final T t) {
     return Optional
         .of(ResponseEntity.ok(t))
-        .orElseThrow(MovieException::new);
+        .orElseThrow(() -> new MovieException(t.toString()));
   }
 
   public static ResponseVO of(final boolean result) {

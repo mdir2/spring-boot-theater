@@ -7,8 +7,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import me.wook.springboot.data.entity.Movie;
-import me.wook.springboot.data.service.MovieService;
+import me.wook.springboot.movie.entity.Movie;
+import me.wook.springboot.movie.service.MovieService;
 import me.wook.springboot.web.dto.MovieDTO;
 import me.wook.springboot.web.dto.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,7 +58,6 @@ public class MovieController {
   @GetMapping("")
   ResponseEntity<Page<Movie>> list(@RequestParam(defaultValue = "1") final int page,
       @RequestParam(defaultValue = "10") final int pageSize) throws Exception {
-
     return responseEntity(movieService.list(PageRequest.of(page - 1, pageSize)));
   }
 
@@ -73,14 +73,11 @@ public class MovieController {
   })
   @GetMapping("/{id}")
   ResponseEntity<Movie> detail(@PathVariable final long id) {
-    return responseEntity(movieService.detail(MovieDTO.builder().id(id).build()));
+    return responseEntity(movieService.detail(id));
   }
 
   @ApiOperation("영화 추가")
   @ApiImplicitParams({
-      @ApiImplicitParam(
-          name = "id"
-      ),
       @ApiImplicitParam(
           name = "name",
           value = "영화 이름",
@@ -97,7 +94,7 @@ public class MovieController {
       )
   })
   @PostMapping("")
-  ResponseEntity<ResponseVO> add(final MovieDTO movieDto) {
+  ResponseEntity<ResponseVO> add(@RequestBody final MovieDTO movieDto) {
     return responseEntity(of(movieService.add(movieDto)));
   }
 
@@ -109,25 +106,11 @@ public class MovieController {
           dataType = "long",
           paramType = "path",
           required = true
-      ),
-      @ApiImplicitParam(
-          name = "name",
-          value = "영화 이름",
-          dataType = "string",
-          paramType = "query",
-          required = true
-      ),
-      @ApiImplicitParam(
-          name = "description",
-          value = "영화 상세 정보",
-          dataType = "string",
-          paramType = "query",
-          required = true
       )
   })
   @PutMapping("/{id}")
-  ResponseEntity<ResponseVO> update(final MovieDTO movieDTO) {
-    return responseEntity(of(movieService.update(movieDTO)));
+  ResponseEntity<ResponseVO> update(@PathVariable final long id, @RequestBody final MovieDTO movieDTO) {
+    return responseEntity(of(movieService.update(id, movieDTO)));
   }
 
   @ApiOperation("영화 삭제")
@@ -142,6 +125,6 @@ public class MovieController {
   })
   @DeleteMapping("/{id}")
   ResponseEntity<ResponseVO> delete(@PathVariable final long id) {
-    return responseEntity(of(movieService.delete(MovieDTO.builder().id(id).build())));
+    return responseEntity(of(movieService.delete(id)));
   }
 }
