@@ -9,5 +9,5 @@ public interface ScreenService {
 
   Page<Screen> list(final Pageable pageable);
 
-  boolean save(final long id , final ScreenDTO screenDTO);
+  boolean save(final long id, final ScreenDTO screenDTO);
 }

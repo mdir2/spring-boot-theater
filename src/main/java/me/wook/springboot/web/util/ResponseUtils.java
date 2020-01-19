@@ -12,7 +12,7 @@ public final class ResponseUtils {
   private ResponseUtils() {
   }
 
-  public static <T> ResponseEntity<T> responseEntity(T t) {
+  public static <T> ResponseEntity<T> responseEntity(final T t) {
     return Optional
         .of(ResponseEntity.ok(t))
         .orElseThrow(MovieException::new);
@@ -21,12 +21,12 @@ public final class ResponseUtils {
   public static ResponseVO of(final boolean result) {
     Function<Boolean, ResponseVO> function = bool -> {
       if (bool) {
-        return null;
+        return ResponseVO.builder().build();
       } else {
         return ResponseVO
             .builder()
-            .status(HttpStatus.OK.value())
-            .message(HttpStatus.OK.getReasonPhrase())
+            .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+            .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
             .build();
       }
     };

@@ -1,6 +1,5 @@
 package me.wook.springboot.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,11 +32,4 @@ public class Movie {
 
   @OneToMany(mappedBy = "movie")
   private Collection<Screen> screens;
-
-  public void addScreen(Screen screen){
-    this.screens.add(screen);
-    if(screen.getMovie() != this){
-      screen.setMovie(this);
-    }
-  }
 }

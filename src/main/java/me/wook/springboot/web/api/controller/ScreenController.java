@@ -1,9 +1,12 @@
-package me.wook.springboot.web.controller;
+package me.wook.springboot.web.api.controller;
 
 import static me.wook.springboot.web.util.ResponseUtils.of;
 import static me.wook.springboot.web.util.ResponseUtils.responseEntity;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import me.wook.springboot.data.entity.Screen;
 import me.wook.springboot.data.service.ScreenService;
 import me.wook.springboot.web.dto.ResponseVO;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "Screen")
+@Api(value = "ScreenController")
 @RestController
 @RequestMapping("/screen")
 public class ScreenController {
@@ -30,14 +33,57 @@ public class ScreenController {
     this.screenService = screenService;
   }
 
+  @ApiOperation("스크린 목록 조회")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "page",
+          value = "현재 페이지",
+          defaultValue = "1",
+          dataType = "int",
+          paramType = "query",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "pageSize",
+          value = "한 페이지 출력 될 로우 개수",
+          defaultValue = "10",
+          dataType = "int",
+          paramType = "query",
+          required = true
+      )
+  })
   @GetMapping("")
   ResponseEntity<Page<Screen>> list(@RequestParam(defaultValue = "1") final int page,
       @RequestParam(defaultValue = "10") final int pageSize) {
     return responseEntity(screenService.list(PageRequest.of(page - 1, pageSize)));
   }
 
+  @ApiOperation("스크린 추가")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "movieId",
+          value = "영화 아이디",
+          dataType = "long",
+          paramType = "query",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "id",
+          value = "스크린 아이디",
+          dataType = "long",
+          paramType = "query",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "name",
+          value = "스크린 이름",
+          dataType = "string",
+          paramType = "query",
+          required = true
+      )
+  })
   @PostMapping("")
-  ResponseEntity<ResponseVO> add(@RequestParam final long id, final ScreenDTO screenDTO) {
+  ResponseEntity<ResponseVO> add(final ScreenDTO screenDTO, final long id) {
     return responseEntity(of(screenService.save(id, screenDTO)));
   }
 }

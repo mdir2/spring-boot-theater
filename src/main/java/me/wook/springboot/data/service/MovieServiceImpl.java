@@ -27,7 +27,8 @@ public class MovieServiceImpl implements MovieService {
 
   @Override
   public Movie detail(MovieDTO movieDTO) {
-    return movieRepository.findById(movieDTO.movie().getId()).orElseThrow(MovieException::new);
+    return movieRepository.findById(movieDTO.movie().getId())
+        .orElseThrow(() -> new MovieException("detail", movieDTO));
   }
 
   @Override
@@ -39,7 +40,8 @@ public class MovieServiceImpl implements MovieService {
   public boolean update(MovieDTO movieDTO) {
     movieRepository.findById(movieDTO.getId()).ifPresent(movie -> {
       movie = movieDTO.movie();
-      Optional.of(movieRepository.save(movie)).orElseThrow(MovieException::new);
+      Optional.of(movieRepository.save(movie))
+          .orElseThrow(() -> new MovieException("update", movieDTO));
     });
     return movieRepository.findById(movieDTO.getId()).isPresent();
   }

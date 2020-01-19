@@ -1,4 +1,4 @@
-package me.wook.springboot.web.controller;
+package me.wook.springboot.web.api.controller;
 
 import static me.wook.springboot.web.util.ResponseUtils.of;
 import static me.wook.springboot.web.util.ResponseUtils.responseEntity;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "Movie")
+@Api(value = "MovieController")
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -79,12 +79,7 @@ public class MovieController {
   @ApiOperation("영화 추가")
   @ApiImplicitParams({
       @ApiImplicitParam(
-
-          name = "id",
-          value = "영화 아이디",
-          dataType = "long",
-          paramType = "query",
-          required = true
+          name = "id"
       ),
       @ApiImplicitParam(
           name = "name",
@@ -106,11 +101,45 @@ public class MovieController {
     return responseEntity(of(movieService.add(movieDto)));
   }
 
+  @ApiOperation("영화 수정")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "id",
+          value = "영화 아이디",
+          dataType = "long",
+          paramType = "path",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "name",
+          value = "영화 이름",
+          dataType = "string",
+          paramType = "query",
+          required = true
+      ),
+      @ApiImplicitParam(
+          name = "description",
+          value = "영화 상세 정보",
+          dataType = "string",
+          paramType = "query",
+          required = true
+      )
+  })
   @PutMapping("/{id}")
   ResponseEntity<ResponseVO> update(final MovieDTO movieDTO) {
     return responseEntity(of(movieService.update(movieDTO)));
   }
 
+  @ApiOperation("영화 삭제")
+  @ApiImplicitParams({
+      @ApiImplicitParam(
+          name = "id",
+          value = "영화 아이디",
+          dataType = "string",
+          paramType = "path",
+          required = true
+      )
+  })
   @DeleteMapping("/{id}")
   ResponseEntity<ResponseVO> delete(@PathVariable final long id) {
     return responseEntity(of(movieService.delete(MovieDTO.builder().id(id).build())));
