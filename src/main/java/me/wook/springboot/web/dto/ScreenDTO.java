@@ -1,4 +1,4 @@
-package me.wook.springboot.movie.model;
+package me.wook.springboot.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movie {
+public class ScreenDTO {
 
-  private long id;
   private String name;
 }

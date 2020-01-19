@@ -1,4 +1,4 @@
-package me.wook.springboot.web.handler;
+package me.wook.springboot.web.api.handler;
 
 import me.wook.springboot.web.dto.ResponseVO;
 import org.springframework.http.HttpStatus;

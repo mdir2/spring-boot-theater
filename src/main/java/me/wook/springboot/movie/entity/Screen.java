@@ -1,12 +1,12 @@
-package me.wook.springboot.data.entity;
+package me.wook.springboot.movie.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Movie {
+@JsonIdentityInfo(property = "@screen", generator = ObjectIdGenerators.UUIDGenerator.class)
+public class Screen {
 
   @Id
   @GeneratedValue
@@ -26,10 +27,6 @@ public class Movie {
   @Column
   private String name;
 
-  @Column
-  private String description;
-
-  @OneToMany
-  private List<Screen> screens = new ArrayList<>();
-
+  @ManyToOne
+  private Movie movie;
 }
