@@ -14,6 +14,6 @@ public class Audience {
 
   @Default
   private String name = "GUEST";
-
-  private Wallet wellet;
+  private int age;
+  private Wallet wallet;
 }
