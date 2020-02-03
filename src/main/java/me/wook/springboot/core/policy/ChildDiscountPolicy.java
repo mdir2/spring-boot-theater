@@ -1,4 +1,4 @@
-package me.wook.springboot.core.policy.service;
+package me.wook.springboot.core.policy;
 
 import me.wook.springboot.core.model.Audience;
 import me.wook.springboot.core.model.Movie;
