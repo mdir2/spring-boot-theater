@@ -23,6 +23,12 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <artifactId>springfox-swagger2</artifactId>
       <groupId>io.springfox</groupId>
       <version>2.9.2</version>
@@ -68,4 +74,5 @@
 
   <version>0.0.1-SNAPSHOT</version>
 
+  <packaging>war</packaging>
 </project>
