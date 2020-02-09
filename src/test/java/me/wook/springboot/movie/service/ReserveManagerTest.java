@@ -1,12 +1,9 @@
 package me.wook.springboot.movie.service;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.mockito.Mockito.when;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import me.wook.springboot.movie.entity.Movie;
-import me.wook.springboot.movie.entity.Screen;
-import me.wook.springboot.movie.entity.Seat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -25,7 +22,7 @@ class ReserveManagerTest {
 
   @Test
   @DisplayName("영화 예약하기")
-  void reservation() throws Exception {
+  void reserve() throws Exception {
     /*
      예약 순서
      1. 영화 정보를 불러온다
@@ -63,7 +60,6 @@ class ReserveManagerTest {
     // boolean isSuccess = reserveManger.reserve();
 
     // then(isSuccess).isEqualTo(true);
-
     then(movie).isNotNull();
   }
 }
