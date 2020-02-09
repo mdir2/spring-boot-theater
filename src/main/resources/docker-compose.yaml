@@ -1,8 +1,14 @@
 version: '3'
 services:
   db:
-    image: mariadb
+    image: mariadb:latest
+    restart: always
     volumes:
-      - /var/lib/mysql
+      /var/lib/mysql
     environment:
-      -
+    - MYSQL_ROOT_PASSWORD: "1234"
+    - MYSQL_USER: "wook"
+    - MYSQL_PASSWORD: "qwer1234"
+    - MYSQL_DATABASE: "theater"
+    ports:
+    - 3306:13306
